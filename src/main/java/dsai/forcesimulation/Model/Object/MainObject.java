@@ -1,5 +1,7 @@
 package dsai.forcesimulation.Model.Object;
 
+import dsai.forcesimulation.Model.Surface.Surface;
+
 public abstract class MainObject {
     private double side;
     private double mass;
@@ -57,9 +59,9 @@ public abstract class MainObject {
         this.position = 0;
     }
 
-    public void updateAttribute() {
+    public void updateAttribute(double appliedForce) {
         double deltaTime = 0.01;
-        this.setAcceleration(calculateAcceleration());
+        this.setAcceleration(calculateAcceleration(appliedForce));
 
         double currentVelocity = this.getVelocity();
         double newPosition = this.getPosition() + currentVelocity * deltaTime + 0.5 * acceleration * deltaTime * deltaTime;
@@ -70,12 +72,10 @@ public abstract class MainObject {
         } else {
             this.setVelocity(newVelocity);
         }
-
         this.setPosition(newPosition);
     }
 
-    protected abstract double calculateAcceleration();
+    protected abstract double calculateAcceleration(double appliedForce);
 
-    public abstract void calculateForces(double appliedForce, double staticCoeffient,
-                                         double kineticCoefficient);
+    public abstract void calculateForces(double appliedForce, Surface surface);
 }
