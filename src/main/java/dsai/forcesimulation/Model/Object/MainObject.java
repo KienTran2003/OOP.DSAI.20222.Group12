@@ -56,9 +56,6 @@ public abstract class MainObject {
         this.velocity = 0;
         this.position = 0;
     }
-    public double normalForce() {
-        return 10 * mass;
-    }
 
     public void updateAttribute() {
         double deltaTime = 0.01;
