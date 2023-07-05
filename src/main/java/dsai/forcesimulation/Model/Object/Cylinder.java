@@ -1,59 +1,36 @@
 package dsai.forcesimulation.Model.Object;
 
 import dsai.forcesimulation.Model.Surface.Surface;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 public class Cylinder extends MainObject{
-    private double radius;
+    private DoubleProperty radius = new SimpleDoubleProperty();
     private Surface surface;
     private double acceleration;
     private double frictionForce;
-    private double gamma = 0;
-    private double omega = 0;
-    private double theta = 0;
-
-    public double getGamma() {
-        return gamma;
-    }
-
-    public void setGamma(double gamma) {
-        this.gamma = gamma;
-    }
-
-    public double getOmega() {
-        return omega;
-    }
-
-    public void setOmega(double omega) {
-        this.omega = omega;
-    }
-
-    public double getTheta() {
-        return theta;
-    }
-
-    public void setTheta(double theta) {
-        this.theta = theta;
-    }
 
     public Cylinder(double radius, double mass) {
-        super(radius, mass);
+        super(mass);
+        setRadius(radius);
     }
 
+
     public double getRadius() {
+        return radius.get();
+    }
+
+    public DoubleProperty radiusProperty() {
         return radius;
     }
-    public void resetObject() {
-        this.setAcceleration(0);
-        this.setVelocity(0);
-        this.setPosition(0);
-        this.setGamma(0);
-        this.setOmega(0);
-        this.setTheta(0);
+    public void setRadius(double radius){
+        this.radius.set(radius);
     }
+
     @Override
     protected double calculateAcceleration(double appliedForce) {
-        double acceleration = frictionForce / (0.5 * getMass() * getRadius() * getRadius());
-        this.setAcceleration(acceleration);
+        double acceleration = getFrictionForce() / (0.5 * getMass() * getRadius() * getRadius());
+        setAcceleration(acceleration);
         return acceleration;
     }
 
@@ -61,8 +38,8 @@ public class Cylinder extends MainObject{
     public void calculateForces(double appliedForce, Surface surface) {
         double gravitationalForce = calculateGravitationalForce();
         double normalForce = calculateNormalForce(gravitationalForce);
-        double frictionForce = calculateFrictionForce(appliedForce, normalForce, surface);
-        setFrictionForce(frictionForce);
+        this.surface = surface;
+        setFrictionForce(calculateFrictionForce(appliedForce, normalForce, surface));
     }
 
     private double calculateGravitationalForce() {
@@ -77,7 +54,7 @@ public class Cylinder extends MainObject{
         double frictionForce = 0;
 
         if (Math.abs(appliedForce) <= 3 * normalForce * surface.getStaticCoefficient() && this.getVelocity() == 0) {
-            frictionForce = -appliedForce;
+            frictionForce = -appliedForce/3;
         } else if (Math.abs(appliedForce) > 3 * normalForce * surface.getStaticCoefficient() && this.getVelocity() == 0) {
             if (appliedForce > 0) {
                 frictionForce = -normalForce * surface.getKineticCoefficient();
@@ -91,19 +68,5 @@ public class Cylinder extends MainObject{
         }
 
         return frictionForce;
-    }
-
-    @Override
-    public void updateAttribute(double appliedForce) {
-        super.updateAttribute(appliedForce);
-
-        double newGamma = calculateAcceleration(appliedForce);
-
-        if (this.getOmega() > 0 && this.getOmega() + newGamma < 0) {
-            this.setTheta(0);
-        } else {
-            double newTheta = this.getTheta() + 0.01 * this.getOmega() + 0.5 * newGamma * 0.01 * 0.01;
-            this.setTheta(newTheta);
-        }
     }
 }
