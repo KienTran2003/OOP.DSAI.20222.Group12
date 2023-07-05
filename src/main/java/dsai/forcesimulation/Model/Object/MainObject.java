@@ -8,6 +8,8 @@ public abstract class MainObject {
     private double position = 0;
     private double velocity = 0;
     private double acceleration = 0;
+    protected double frictionForce;
+
 
     public MainObject(double side, double mass) {
         setSide(side);
@@ -52,6 +54,9 @@ public abstract class MainObject {
     public void setPosition(double position) {
         this.position = position;
     }
+    public void setFrictionForce(double frictionForce) {
+        this.frictionForce = frictionForce;
+    }
 
     public void resetObject(){
         this.acceleration = 0;
@@ -63,8 +68,9 @@ public abstract class MainObject {
         double deltaTime = 0.01;
         this.setAcceleration(calculateAcceleration(appliedForce));
 
+        this.setPosition(this.getPosition() + deltaTime * this.getVelocity());
+
         double currentVelocity = this.getVelocity();
-        double newPosition = this.getPosition() + currentVelocity * deltaTime + 0.5 * acceleration * deltaTime * deltaTime;
         double newVelocity = currentVelocity + acceleration * deltaTime;
 
         if (currentVelocity * newVelocity < 0) {
@@ -72,7 +78,6 @@ public abstract class MainObject {
         } else {
             this.setVelocity(newVelocity);
         }
-        this.setPosition(newPosition);
     }
 
     protected abstract double calculateAcceleration(double appliedForce);

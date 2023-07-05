@@ -14,6 +14,7 @@ public class CubeBox extends MainObject{
     protected double calculateAcceleration(double appliedForce) {
         double netForce = Math.abs(appliedForce - frictionForce);
         double acceleration = netForce / getMass();
+        this.setAcceleration(acceleration);
         return acceleration;
     }
 
@@ -22,17 +23,15 @@ public class CubeBox extends MainObject{
         double gravitationalForce = calculateGravitationalForce();
         double normalForce = calculateNormalForce(gravitationalForce);
         double frictionForce = calculateFrictionForce(appliedForce, normalForce, surface);
-        this.frictionForce = frictionForce;
+        setFrictionForce(frictionForce);
     }
 
     private double calculateGravitationalForce() {
-        double gravitationalForce = this.getMass() * 10;
-        return gravitationalForce;
+        return this.getMass() * 10;
     }
 
     private double calculateNormalForce(double gravitationalForce) {
-        double normalForce = gravitationalForce;
-        return normalForce;
+        return gravitationalForce;
     }
 
     private double calculateFrictionForce(double appliedForce, double normalForce, Surface surface) {
