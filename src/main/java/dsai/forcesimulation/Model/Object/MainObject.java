@@ -1,11 +1,15 @@
 package dsai.forcesimulation.Model.Object;
 
+import dsai.forcesimulation.Model.Surface.Surface;
+
 public abstract class MainObject {
     private double side;
     private double mass;
     private double position = 0;
     private double velocity = 0;
     private double acceleration = 0;
+    protected double frictionForce;
+
 
     public MainObject(double side, double mass) {
         setSide(side);
@@ -50,22 +54,23 @@ public abstract class MainObject {
     public void setPosition(double position) {
         this.position = position;
     }
+    public void setFrictionForce(double frictionForce) {
+        this.frictionForce = frictionForce;
+    }
 
     public void resetObject(){
         this.acceleration = 0;
         this.velocity = 0;
         this.position = 0;
     }
-    public double normalForce() {
-        return 10 * mass;
-    }
 
-    public void updateAttribute() {
+    public void updateAttribute(double appliedForce) {
         double deltaTime = 0.01;
-        this.setAcceleration(calculateAcceleration());
+        this.setAcceleration(calculateAcceleration(appliedForce));
+
+        this.setPosition(this.getPosition() + deltaTime * this.getVelocity());
 
         double currentVelocity = this.getVelocity();
-        double newPosition = this.getPosition() + currentVelocity * deltaTime + 0.5 * acceleration * deltaTime * deltaTime;
         double newVelocity = currentVelocity + acceleration * deltaTime;
 
         if (currentVelocity * newVelocity < 0) {
@@ -73,12 +78,9 @@ public abstract class MainObject {
         } else {
             this.setVelocity(newVelocity);
         }
-
-        this.setPosition(newPosition);
     }
 
-    protected abstract double calculateAcceleration();
+    protected abstract double calculateAcceleration(double appliedForce);
 
-    public abstract void calculateForces(double appliedForce, double staticCoeffient,
-                                         double kineticCoefficient);
+    public abstract void calculateForces(double appliedForce, Surface surface);
 }
