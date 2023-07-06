@@ -3,7 +3,6 @@ package dsai.forcesimulation.Model.Object;
 import dsai.forcesimulation.Model.Surface.Surface;
 
 public class CubeBox extends MainObject{
-    private Surface surface;
     private double frictionForce;
 
     public CubeBox(double side, double mass) {
@@ -12,7 +11,7 @@ public class CubeBox extends MainObject{
 
     @Override
     protected double calculateAcceleration(double appliedForce) {
-        double netForce = Math.abs(appliedForce - getFrictionForce());
+        double netForce = appliedForce - getFrictionForce();
         double acceleration = netForce / getMass();
         setAcceleration(acceleration);
         return acceleration;
@@ -22,7 +21,6 @@ public class CubeBox extends MainObject{
     public void calculateForces(double appliedForce, Surface surface) {
         double gravitationalForce = calculateGravitationalForce();
         double normalForce = calculateNormalForce(gravitationalForce);
-        this.surface = surface;
         setFrictionForce(calculateFrictionForce(appliedForce, normalForce, surface));
     }
 
