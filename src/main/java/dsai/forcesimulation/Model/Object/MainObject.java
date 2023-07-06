@@ -1,82 +1,104 @@
 package dsai.forcesimulation.Model.Object;
 
 import dsai.forcesimulation.Model.Surface.Surface;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class MainObject {
     private double side;
-    private double mass;
-    private double position = 0;
-    private double velocity = 0;
-    private double acceleration = 0;
+    protected DoubleProperty mass = new SimpleDoubleProperty(50);
+    protected DoubleProperty position = new SimpleDoubleProperty(0);
+    protected DoubleProperty velocity = new SimpleDoubleProperty(0);
+    protected DoubleProperty acceleration = new SimpleDoubleProperty(0);
     protected double frictionForce;
 
 
     public MainObject(double side, double mass) {
-        setSide(side);
+        this.side = side;
         setMass(mass);
     }
 
-    public double getVelocity() {
-        return velocity;
+    public MainObject() {
     }
 
-    public void setVelocity(double velocity) {
-        this.velocity = velocity;
-    }
-
-    public double getAcceleration() {
-        return acceleration;
-    }
-
-    public void setAcceleration(double acceleration) {
-        this.acceleration = acceleration;
-    }
-
-    public double getSide() {
-        return side;
-    }
-
-    public void setSide(double side) {
-        this.side = side;
+    public MainObject(double mass) {
     }
 
     public double getMass() {
-        return mass;
+        return mass.get();
     }
 
     public void setMass(double mass) {
-        this.mass = mass;
+        this.mass.set(mass);
     }
+
+    public DoubleProperty massProperty() {
+        return mass;
+    }
+
     public double getPosition() {
+        return position.get();
+    }
+
+    public DoubleProperty positionProperty() {
         return position;
     }
 
     public void setPosition(double position) {
-        this.position = position;
+        this.position.set(position);
     }
+
+    public double getVelocity() {
+        return velocity.get();
+    }
+
+    public DoubleProperty velocityProperty() {
+        return velocity;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity.set(velocity);
+    }
+
+    public double getAcceleration() {
+        return acceleration.get();
+    }
+
+    public DoubleProperty accelerationProperty() {
+        return acceleration;
+    }
+
+    public void setAcceleration(double acceleration) {
+        this.acceleration.set(acceleration);
+    }
+
+    public double getFrictionForce() {
+        return frictionForce;
+    }
+
     public void setFrictionForce(double frictionForce) {
         this.frictionForce = frictionForce;
     }
 
     public void resetObject(){
-        this.acceleration = 0;
-        this.velocity = 0;
-        this.position = 0;
+        setAcceleration(0);
+        setVelocity(0);
+        setPosition(0);
     }
 
     public void updateAttribute(double appliedForce) {
         double deltaTime = 0.01;
-        this.setAcceleration(calculateAcceleration(appliedForce));
+        double acc = calculateAcceleration(appliedForce);
+        acceleration.set(acc);
+        velocity.set(velocity.get() + acceleration.get() * deltaTime);
+        position.set(position.get() + velocity.get() * deltaTime);
 
-        this.setPosition(this.getPosition() + deltaTime * this.getVelocity());
-
-        double currentVelocity = this.getVelocity();
-        double newVelocity = currentVelocity + acceleration * deltaTime;
-
-        if (currentVelocity * newVelocity < 0) {
-            this.setVelocity(0); //stop
+        double currentVelocity = velocity.get();
+        double newVelocity = currentVelocity + acceleration.get() * deltaTime;
+        if (currentVelocity * newVelocity <= 0) {
+            velocity.set(0); // Stop when velocity changes direction
         } else {
-            this.setVelocity(newVelocity);
+            velocity.set(newVelocity);
         }
     }
 
