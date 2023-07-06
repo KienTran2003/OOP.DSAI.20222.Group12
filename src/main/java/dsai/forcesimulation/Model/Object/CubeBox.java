@@ -11,7 +11,7 @@ public class CubeBox extends MainObject{
 
     @Override
     protected double calculateAcceleration(double appliedForce) {
-        double netForce = appliedForce - getFrictionForce();
+        double netForce = appliedForce + getFrictionForce();
         double acceleration = netForce / getMass();
         setAcceleration(acceleration);
         return acceleration;
