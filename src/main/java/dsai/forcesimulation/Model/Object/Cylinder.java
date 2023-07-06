@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public class Cylinder extends MainObject{
     private DoubleProperty radius = new SimpleDoubleProperty();
-    private Surface surface;
     private double acceleration;
     private double frictionForce;
 
@@ -38,7 +37,6 @@ public class Cylinder extends MainObject{
     public void calculateForces(double appliedForce, Surface surface) {
         double gravitationalForce = calculateGravitationalForce();
         double normalForce = calculateNormalForce(gravitationalForce);
-        this.surface = surface;
         setFrictionForce(calculateFrictionForce(appliedForce, normalForce, surface));
     }
 
