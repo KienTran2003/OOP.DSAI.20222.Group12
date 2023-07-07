@@ -5,4 +5,5 @@ module dsai.forcesimulation {
                             
     opens dsai.forcesimulation to javafx.fxml;
     exports dsai.forcesimulation;
+    exports dsai.forcesimulation.Test;
 }
