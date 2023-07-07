@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="290.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <CheckBox fx:id="forceBox" layoutX="21.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="145.0" text="Force">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="sumBox" layoutX="21.0" layoutY="40.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="168.0" text="Sum of Force">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="valueBox" layoutX="21.0" layoutY="80.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="145.0" text="Values">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="massBox" layoutX="21.0" layoutY="120.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="145.0" text="Mass">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="accelerateBox" layoutX="21.0" layoutY="160.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="168.0" text="Acceleration">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="veloBox" layoutX="21.0" layoutY="200.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="145.0" text="Velocity">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="posiBox" layoutX="21.0" layoutY="240.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="145.0" text="Position">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </CheckBox>
+   </children>
+</AnchorPane>
