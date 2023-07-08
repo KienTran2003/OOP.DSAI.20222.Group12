@@ -101,7 +101,20 @@ public class SliderController implements Initializable {
     }
 
     void update(){
+        double appliedForce = slider.getValue();
+        double friction = mainObject.friction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient());
+        double acceleration = (appliedForce + mainObject.friction(appliedForce, surface.getStaticCoefficient(), surface.getKineticCoefficient()))/mainObject.getMass();
 
+
+
+        forceController.updateAllForce(slider.getValue(),friction , checkboxController.getForceBox(),checkboxController.getSumBox(), checkboxController.getValueBox());
+
+        if (mainObject instanceof Cylinder){
+            double gamma = ((Cylinder) mainObject).calculateGamma(friction, mainObject.getMass(), mainObject.getSide());
+            ((Cylinder) mainObject).updateAttribute(acceleration, gamma);
+        } else {
+            mainObject.updateAttribute(acceleration);
+        }
     }
 
     void setDisableSlider(boolean bool){
