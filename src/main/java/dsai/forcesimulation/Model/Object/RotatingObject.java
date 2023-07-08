@@ -11,7 +11,7 @@ public interface RotatingObject {
     void setTheta(double theta);
     double getOmega();
     DoubleProperty omegaProperty();
-    void setOmega(double omega);public
+    void setOmega(double omega);
     DoubleProperty radiusProperty();
     double getRadius();
     void setRadius(double radius) throws Exception;
