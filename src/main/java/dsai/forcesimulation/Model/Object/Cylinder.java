@@ -74,12 +74,11 @@ public class Cylinder extends MainObject implements RotatingObject{
         return acceleration;
     }
 
-    private double calculateAngularAcceleration(double appliedForce) {
+    public double calculateAngularAcceleration(double appliedForce) {
         double angularAcceleration = getFrictionForce() / (0.5 * getMass() * Math.pow(getRadius(), 2));
         setGamma(angularAcceleration);
         return angularAcceleration;
     }
-    // Cập nhật vị trí góc
      public void updateAngularPosition() {
         double deltaTime = 0.01;
         double currentAngularPosition = getTheta();
