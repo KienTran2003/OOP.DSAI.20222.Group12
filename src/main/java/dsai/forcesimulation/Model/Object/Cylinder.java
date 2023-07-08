@@ -80,12 +80,14 @@ public class Cylinder extends MainObject implements RotatingObject{
         return angularAcceleration;
     }
     // Cập nhật vị trí góc
-     public void updateAngularPosition(double deltaTime) {
+     public void updateAngularPosition() {
+        double deltaTime = 0.01;
         double currentAngularPosition = getTheta();
         double newAngularPosition = currentAngularPosition + getOmega() * deltaTime;
         setTheta(newAngularPosition);
     }
-    public void updateAngularVelocity(double deltaTime) {
+    public void updateAngularVelocity() {
+        double deltaTime = 0.01;
         double currentAngularVelocity = getOmega();
         double newAngularVelocity = currentAngularVelocity + getGamma() * deltaTime;
         setOmega(newAngularVelocity);
@@ -124,8 +126,8 @@ public class Cylinder extends MainObject implements RotatingObject{
         acceleration.set(acc);
 
         // Cập nhật vận tốc góc và vị trí góc của Cylinder
-        updateAngularVelocity(deltaTime);
-        updateAngularPosition(deltaTime);
+        updateAngularVelocity();
+        updateAngularPosition();
 
         double currentVelocity = getVelocity();
         double newVelocity = currentVelocity + getAcceleration() * deltaTime;

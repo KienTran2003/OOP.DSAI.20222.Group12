@@ -15,6 +15,6 @@ public interface RotatingObject {
     DoubleProperty radiusProperty();
     double getRadius();
     void setRadius(double radius) throws Exception;
-    void updateAngularPosition(double deltaTime);
-    void updateAngularVelocity(double deltaTime);
+    void updateAngularPosition();
+    void updateAngularVelocity();
 }
