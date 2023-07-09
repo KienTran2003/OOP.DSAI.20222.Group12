@@ -404,7 +404,6 @@ public class SceneController implements Initializable {
         loaderVector.setController(forceController);
         try {
             vectorPane.getChildren().add(loaderVector.load());
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
