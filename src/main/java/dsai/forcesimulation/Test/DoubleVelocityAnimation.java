@@ -27,8 +27,8 @@ public class DoubleVelocityAnimation extends Application {
         // Truyền appliedForce mới khi giá trị trên Slider thay đổi
         slider.valueProperty().addListener((observable, oldValue, newValue) -> {
             appliedForce = newValue.doubleValue();
-            cubeBox.calculateForces(appliedForce, surface);
-            cubeBox.updateAttribute(appliedForce);
+            cubeBox.calculateFrictionForces(appliedForce, surface);
+            cubeBox.updateAttribute(appliedForce, surface);
             velocityLabel.setText("Velocity: " + cubeBox.getVelocity());
             accelerationLabel.setText("Acceleration: " + cubeBox.getAcceleration());
         });
@@ -42,8 +42,8 @@ public class DoubleVelocityAnimation extends Application {
         primaryStage.show();
 
         // Tính toán và cập nhật lần đầu
-        cubeBox.calculateForces(appliedForce, surface);
-        cubeBox.updateAttribute(appliedForce);
+        cubeBox.calculateFrictionForces(appliedForce, surface);
+        cubeBox.updateAttribute(appliedForce, surface);
         velocityLabel.setText("Velocity: " + cubeBox.getVelocity());
         accelerationLabel.setText("Acceleration: " + cubeBox.getAcceleration());
     }

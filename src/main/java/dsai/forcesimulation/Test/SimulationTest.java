@@ -28,14 +28,14 @@ public class SimulationTest {
                 double cubeSide = scanner.nextDouble();
 
                 CubeBox cubeBox = new CubeBox(cubeSide, cubeMass);
-                cubeBox.calculateForces(appliedForce, surface);
-                cubeBox.updateAttribute(appliedForce);
+                double frictionForce = cubeBox.calculateFrictionForces(appliedForce, surface);
+                cubeBox.updateAttribute(appliedForce, surface);
                 // In thông tin về CubeBox...
                 System.out.println("CubeBox:");
                 System.out.println("Velocity: " + cubeBox.getVelocity());
                 System.out.println("Acceleration: " + cubeBox.getAcceleration());
-                System.out.println("Friction Force: " + cubeBox.getFrictionForce());
-                double sumOfForce = appliedForce + cubeBox.getFrictionForce();
+                System.out.println("Friction Force: " + frictionForce);
+                double sumOfForce = appliedForce + frictionForce;
                 System.out.println("Sum of Force: " + sumOfForce);
                 break;
             case 2:
@@ -45,14 +45,14 @@ public class SimulationTest {
                 double cylinderRadius = scanner.nextDouble();
 
                 Cylinder cylinder = new Cylinder(cylinderRadius, cylinderMass);
-                cylinder.calculateForces(appliedForce, surface);
-                cylinder.updateAttribute(appliedForce);
+                frictionForce = cylinder.calculateFrictionForces(appliedForce, surface);
+                cylinder.updateAttribute(appliedForce, surface);
                 // In thông tin về Cylinder...
                 System.out.println("Cylinder:");
                 System.out.println("Velocity: " + cylinder.getVelocity());
                 System.out.println("Acceleration: " + cylinder.getAcceleration());
-                System.out.println("Friction Force: " + cylinder.getFrictionForce());
-                sumOfForce = appliedForce + cylinder.getFrictionForce();
+                System.out.println("Friction Force: " + frictionForce);
+                sumOfForce = appliedForce + frictionForce;
                 System.out.println("Sum of Force: " + sumOfForce);
                 break;
             default:
