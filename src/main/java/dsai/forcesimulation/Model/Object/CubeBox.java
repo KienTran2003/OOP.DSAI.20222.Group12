@@ -3,10 +3,11 @@ package dsai.forcesimulation.Model.Object;
 import dsai.forcesimulation.Model.Surface.Surface;
 
 public class CubeBox extends MainObject{
-    private double frictionForce;
+    private double side;
 
     public CubeBox(double side, double mass) {
-        super(side, mass);
+        super(mass);
+        this.side = side;
     }
 
     @Override
@@ -22,14 +23,6 @@ public class CubeBox extends MainObject{
         double gravitationalForce = calculateGravitationalForce();
         double normalForce = calculateNormalForce(gravitationalForce);
         setFrictionForce(calculateFrictionForce(appliedForce, normalForce, surface));
-    }
-
-    private double calculateGravitationalForce() {
-        return this.getMass() * 10;
-    }
-
-    private double calculateNormalForce(double gravitationalForce) {
-        return gravitationalForce;
     }
 
     private double calculateFrictionForce(double appliedForce, double normalForce, Surface surface) {

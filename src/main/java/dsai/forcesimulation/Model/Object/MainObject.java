@@ -5,7 +5,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class MainObject {
-    private double side;
     protected DoubleProperty mass = new SimpleDoubleProperty(50);
     protected DoubleProperty position = new SimpleDoubleProperty(0);
     protected DoubleProperty velocity = new SimpleDoubleProperty(0);
@@ -13,12 +12,8 @@ public abstract class MainObject {
     protected double frictionForce;
 
 
-    public MainObject(double side, double mass) {
-        this.side = side;
-        setMass(mass);
-    }
-
     public MainObject(double mass) {
+        setMass(mass);
     }
 
     public double getMass() {
@@ -98,7 +93,13 @@ public abstract class MainObject {
             velocity.set(newVelocity);
         }
     }
+    double calculateGravitationalForce() {
+        return this.getMass() * 10;
+    }
 
+    double calculateNormalForce(double gravitationalForce) {
+        return gravitationalForce;
+    }
     protected abstract double calculateAcceleration(double appliedForce);
 
     public abstract void calculateForces(double appliedForce, Surface surface);
