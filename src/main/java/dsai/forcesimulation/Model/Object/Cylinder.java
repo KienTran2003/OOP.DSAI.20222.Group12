@@ -62,24 +62,24 @@ public class Cylinder extends MainObject implements RotatingObject{
     }
 
     @Override
-    protected double calculateAcceleration(double appliedForce) {
-        double angularAcceleration = calculateAngularAcceleration(appliedForce);
+    protected double calculateAcceleration(double appliedForce, Surface surface) {
+        double angularAcceleration = calculateAngularAcceleration(appliedForce, surface);
         double acceleration;
         if (angularAcceleration == 0) {
             acceleration = appliedForce / getMass();
         } else {
             acceleration = angularAcceleration * getRadius();
         }
-        setAcceleration(acceleration);
         return acceleration;
     }
 
-    public double calculateAngularAcceleration(double appliedForce) {
-        double angularAcceleration = getFrictionForce() / (0.5 * getMass() * Math.pow(getRadius(), 2));
+    public double calculateAngularAcceleration(double appliedForce, Surface surface) {
+        double frictionForce = calculateFrictionForces(appliedForce, surface);
+        double angularAcceleration = frictionForce / (0.5 * getMass() * Math.pow(getRadius(), 2));
         setGamma(angularAcceleration);
         return angularAcceleration;
     }
-     public void updateAngularPosition() {
+    public void updateAngularPosition() {
         double deltaTime = 0.01;
         double currentAngularPosition = getTheta();
         double newAngularPosition = currentAngularPosition + getOmega() * deltaTime;
@@ -92,17 +92,14 @@ public class Cylinder extends MainObject implements RotatingObject{
         setOmega(newAngularVelocity);
     }
     @Override
-    public void calculateForces(double appliedForce, Surface surface) {
+    public double calculateFrictionForces(double appliedForce, Surface surface) {
         double gravitationalForce = calculateGravitationalForce();
         double normalForce = calculateNormalForce(gravitationalForce);
-        setFrictionForce(calculateFrictionForce(appliedForce, normalForce, surface));
-    }
 
-    private double calculateFrictionForce(double appliedForce, double normalForce, Surface surface) {
         double frictionForce = 0;
 
         if (Math.abs(appliedForce) <= 3 * normalForce * surface.getStaticCoefficient() && this.getVelocity() == 0) {
-            frictionForce = -appliedForce/3;
+            frictionForce = -appliedForce / 3;
         } else if (Math.abs(appliedForce) > 3 * normalForce * surface.getStaticCoefficient() && this.getVelocity() == 0) {
             if (appliedForce > 0) {
                 frictionForce = -normalForce * surface.getKineticCoefficient();
@@ -114,14 +111,14 @@ public class Cylinder extends MainObject implements RotatingObject{
         } else {
             frictionForce = -normalForce * surface.getKineticCoefficient();
         }
-
         return frictionForce;
     }
-    public void updateAttribute(double appliedForce) {
+
+    public void updateAttribute(double appliedForce, Surface surface) {
         double deltaTime = 0.01;
 
         // Cập nhật gia tốc dựa trên lực tác dụng
-        double acc = calculateAcceleration(appliedForce);
+        double acc = calculateAcceleration(appliedForce, surface);
         acceleration.set(acc);
 
         // Cập nhật vận tốc góc và vị trí góc của Cylinder
@@ -131,10 +128,6 @@ public class Cylinder extends MainObject implements RotatingObject{
         double currentVelocity = getVelocity();
         double newVelocity = currentVelocity + getAcceleration() * deltaTime;
         setVelocity(newVelocity);
-
-        double currentAngularPosition = getTheta();
-        double newAngularPosition = currentAngularPosition + getOmega() * deltaTime;
-        setTheta(newAngularPosition);
 
         double linearVelocity = getRadius() * getOmega();
         double currentPosition = getPosition();

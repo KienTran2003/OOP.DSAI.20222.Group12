@@ -9,7 +9,6 @@ public abstract class MainObject {
     protected DoubleProperty position = new SimpleDoubleProperty(0);
     protected DoubleProperty velocity = new SimpleDoubleProperty(0);
     protected DoubleProperty acceleration = new SimpleDoubleProperty(0);
-    protected double frictionForce;
 
 
     public MainObject(double mass) {
@@ -64,23 +63,17 @@ public abstract class MainObject {
         this.acceleration.set(acceleration);
     }
 
-    public double getFrictionForce() {
-        return frictionForce;
-    }
-
-    public void setFrictionForce(double frictionForce) {
-        this.frictionForce = frictionForce;
-    }
-
     public void resetObject(){
         setAcceleration(0);
         setVelocity(0);
         setPosition(0);
     }
 
-    public void updateAttribute(double appliedForce) {
+    public abstract double calculateFrictionForces(double appliedForce, Surface surface);
+
+    public void updateAttribute(double appliedForce, Surface surface) {
         double deltaTime = 0.01;
-        double acc = calculateAcceleration(appliedForce);
+        double acc = calculateAcceleration(appliedForce, surface);
         acceleration.set(acc);
         velocity.set(velocity.get() + acceleration.get() * deltaTime);
         position.set(position.get() + velocity.get() * deltaTime);
@@ -100,7 +93,5 @@ public abstract class MainObject {
     double calculateNormalForce(double gravitationalForce) {
         return gravitationalForce;
     }
-    protected abstract double calculateAcceleration(double appliedForce);
-
-    public abstract void calculateForces(double appliedForce, Surface surface);
+    protected abstract double calculateAcceleration(double appliedForce, Surface surface);
 }

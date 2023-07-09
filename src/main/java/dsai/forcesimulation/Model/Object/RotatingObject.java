@@ -1,5 +1,6 @@
 package dsai.forcesimulation.Model.Object;
 
+import dsai.forcesimulation.Model.Surface.Surface;
 import javafx.beans.property.DoubleProperty;
 
 public interface RotatingObject {
@@ -17,5 +18,5 @@ public interface RotatingObject {
     void setRadius(double radius) throws Exception;
     void updateAngularPosition(); //cal theta
     void updateAngularVelocity(); //cal omega
-    double calculateAngularAcceleration(double appliedForce); //cal gamma
+    double calculateAngularAcceleration(double appliedForce, Surface surface); //cal gamma
 }
