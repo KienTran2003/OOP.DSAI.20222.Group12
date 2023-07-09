@@ -146,7 +146,11 @@ public class Cylinder extends MainObject implements RotatingObject{
 
         double currentVelocity = getVelocity();
         double newVelocity = currentVelocity + getAcceleration() * deltaTime;
-        setVelocity(newVelocity);
+        if (currentVelocity * newVelocity <= 0) {
+            velocity.set(0); // Stop when velocity changes direction
+        } else {
+            velocity.set(newVelocity);
+        }
 
         double linearVelocity = getRadius() * getOmega();
         double currentPosition = getPosition();
