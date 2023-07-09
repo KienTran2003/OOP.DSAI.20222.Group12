@@ -75,7 +75,6 @@ public abstract class MainObject {
         double deltaTime = 0.01;
         double acc = calculateAcceleration(appliedForce, surface);
         acceleration.set(acc);
-        velocity.set(velocity.get() + acceleration.get() * deltaTime);
         position.set(position.get() + velocity.get() * deltaTime);
 
         double currentVelocity = velocity.get();
