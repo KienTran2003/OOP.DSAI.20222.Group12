@@ -3,36 +3,25 @@ package dsai.forcesimulation.Model.Object;
 import dsai.forcesimulation.Model.Surface.Surface;
 
 public class CubeBox extends MainObject{
-    private double frictionForce;
+    private double side;
 
     public CubeBox(double side, double mass) {
-        super(side, mass);
+        super(mass);
+        this.side = side;
     }
 
     @Override
-    protected double calculateAcceleration(double appliedForce) {
-        double netForce = appliedForce + getFrictionForce();
-        double acceleration = netForce / getMass();
-        setAcceleration(acceleration);
-        return acceleration;
+    protected double calculateAcceleration(double appliedForce, Surface surface) {
+        double frictionForce = calculateFrictionForces(appliedForce, surface);
+        double netForce = appliedForce + frictionForce;
+        return netForce / getMass();
     }
 
     @Override
-    public void calculateForces(double appliedForce, Surface surface) {
+    public double calculateFrictionForces(double appliedForce, Surface surface) {
         double gravitationalForce = calculateGravitationalForce();
         double normalForce = calculateNormalForce(gravitationalForce);
-        setFrictionForce(calculateFrictionForce(appliedForce, normalForce, surface));
-    }
 
-    private double calculateGravitationalForce() {
-        return this.getMass() * 10;
-    }
-
-    private double calculateNormalForce(double gravitationalForce) {
-        return gravitationalForce;
-    }
-
-    private double calculateFrictionForce(double appliedForce, double normalForce, Surface surface) {
         double frictionForce = 0;
 
         if (Math.abs(appliedForce) <= normalForce * surface.getStaticCoefficient() && this.getVelocity() == 0) {
@@ -48,8 +37,8 @@ public class CubeBox extends MainObject{
         } else {
             frictionForce = -normalForce * surface.getKineticCoefficient();
         }
-
         return frictionForce;
     }
+
 
 }
