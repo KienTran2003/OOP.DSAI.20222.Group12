@@ -60,6 +60,14 @@ public class Cylinder extends MainObject implements RotatingObject{
     public void setOmega(double omega) {
         this.omega.set(omega);
     }
+    public void resetObject(){
+        setAcceleration(0);
+        setVelocity(0);
+        setPosition(0);
+        setGamma(0);
+        setOmega(0);
+        setTheta(0);
+    }
 
     @Override
     protected double calculateAcceleration(double appliedForce, Surface surface) {
@@ -123,7 +131,18 @@ public class Cylinder extends MainObject implements RotatingObject{
 
         // Cập nhật vận tốc góc và vị trí góc của Cylinder
         updateAngularVelocity();
+        if (getOmega() * (getOmega() + deltaTime * getGamma()) < 0) {
+            setOmega(0);
+        } else {
+            setOmega(getOmega() + deltaTime * getGamma());
+        }
+
         updateAngularPosition();
+        if (getTheta() * (getTheta() + deltaTime * getOmega()) < 0) {
+            setTheta(0);
+        } else {
+            setTheta(getTheta() + deltaTime * getOmega());
+        }
 
         double currentVelocity = getVelocity();
         double newVelocity = currentVelocity + getAcceleration() * deltaTime;
