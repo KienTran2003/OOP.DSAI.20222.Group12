@@ -7,9 +7,19 @@
 
 <AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="dsai.forcesimulation.Controller.ForceController">
    <children>
-      <ImageView fx:id="posiAppForce" fitHeight="60.0" fitWidth="1.0" layoutX="209.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="posiAppForce" fitHeight="60.0" fitWidth="1.0" layoutX="219.0" layoutY="74.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@../Image/rightarrow.png" />
+            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/rightarrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="negaAppForce" fitHeight="58.0" fitWidth="1.0" layoutX="219.0" layoutY="76.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/leftarrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="negaFricForce" fitHeight="58.0" fitWidth="1.0" layoutX="218.0" layoutY="76.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/fLeftImage.png" />
          </image>
       </ImageView>
    </children>
