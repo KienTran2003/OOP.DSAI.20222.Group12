@@ -3,6 +3,7 @@ package dsai.forcesimulation.Controller;
 import dsai.forcesimulation.Model.Object.MainObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import dsai.forcesimulation.Model.Object.Cylinder;
 
 public class InfoController {
 	
@@ -25,6 +26,20 @@ public class InfoController {
 	
 	public void showAccelerate(boolean bool) {
 		
+		if (bool) {
+			accelerate.setText(String.format("%.2f",mainObject.getAcceleration()) + " m/s^2");
+		if (mainObject instanceof Cylinder) {
+			anAccelerate.setText(String.format("%.2f",((Cylinder) mainObject).getGamma()) + " */s^2");
+		} else {
+			anAccelerate.setText(0 + " */s^2");
+			}
+	
+		} 
+		accelerate.setVisible(bool);
+	    anAccelerate.setVisible(bool);
+	    accLabel.setVisible(bool);
+	    anAccLabel.setVisible(bool);
 	}
+
 	
 }
