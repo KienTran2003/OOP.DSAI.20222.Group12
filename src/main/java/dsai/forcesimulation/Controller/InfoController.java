@@ -40,6 +40,26 @@ public class InfoController {
 	    accLabel.setVisible(bool);
 	    anAccLabel.setVisible(bool);
 	}
+	
+	public void showVelo(boolean bool) {
+        if (bool){
+            velo.setText(String.format("%.2f",mainObject.getVelocity()) + " m/s");
+            if (mainObject instanceof Cylinder){
+                anVelo.setText(String.format("%.2f",((Cylinder) mainObject).getOmega()) + " */s");
+            } else {
+                anVelo.setText(0 + " */s");
+            }
+            velo.setVisible(true);
+            anVelo.setVisible(true);
+            veloLabel.setVisible(true);
+            anVeloLabel.setVisible(true);
+        } else {
+            velo.setVisible(false);
+            anVelo.setVisible(false);
+            veloLabel.setVisible(false);
+            anVeloLabel.setVisible(false);
+        }
+    }
 
 	
 }
