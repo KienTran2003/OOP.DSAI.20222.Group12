@@ -68,5 +68,10 @@ public class ForceController implements Initializable{
         }
     }
     
+    public void updateAllForce(double sliderValue, double friction, boolean isShowForce,boolean isShowSum, boolean isShowValue){
+        this.updateAppForceVector(sliderValue, isShowForce, isShowValue);
+        this.updateFrictionVector(friction, isShowForce, isShowValue);
+    }
+    
     
 }
