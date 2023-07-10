@@ -47,5 +47,26 @@ public class ForceController implements Initializable{
 
     }
     
+    public void updateFrictionVector(double fricForce, boolean isShow, boolean isShowValue){
+        fricLabel.setText(String.format("%.0f", fricForce) + "N");
+        fricLabel.setVisible(isShow && isShowValue);
+        if (fricForce > 0){
+            posiFricForce.setFitWidth(fricForce/2);
+            fricLabel.setLayoutX(posiFricForce.getLayoutX() + posiFricForce.getFitWidth()/2);
+            posiFricForce.setVisible(isShow);
+            negaFricForce.setVisible(false);
+        } else if (fricForce < 0) {
+            negaFricForce.setLayoutX(origin + (fricForce)/2);
+            negaFricForce.setFitWidth(-fricForce/2);
+            fricLabel.setLayoutX(negaFricForce.getLayoutX() + negaFricForce.getFitWidth()/2);
+            posiFricForce.setVisible(false);
+            negaFricForce.setVisible(isShow);
+        } else {
+            fricLabel.setVisible(false);
+            negaFricForce.setVisible(false);
+            posiFricForce.setVisible(false);
+        }
+    }
+    
     
 }
