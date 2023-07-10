@@ -18,8 +18,9 @@ public class RoadController implements Initializable {
     }
     public void move(double deltaX){
         for (Rectangle rec: recList){
-        	int leftLimit = -180; 
-        	int rightLimit = 1500;
+        	int leftLimit = -180; // = - (100 + 40 + 40), 
+        							// 100 is the width of a rectangle; 40 is the distance between rectangles
+        	int rightLimit = 1500; // the screen is between 0 and 1500
             if (rec.getLayoutX() - deltaX < leftLimit){
                 rec.setLayoutX(rightLimit - (deltaX + leftLimit - rec.getLayoutX()));
             } else if (rec.getLayoutX() - deltaX  > 1500){
