@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="dsai.forcesimulation.Controller.ForceController">
@@ -27,5 +29,15 @@
             <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/fRightIamge.png" />
          </image>
       </ImageView>
+      <Label fx:id="appForceLabel" layoutX="232.0" layoutY="95.0" text="0 N" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="fricLabel" layoutX="57.0" layoutY="95.0" text="0N" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
