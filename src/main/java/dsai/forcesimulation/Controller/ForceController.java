@@ -68,6 +68,28 @@ public class ForceController implements Initializable{
         }
     }
     
+    public void updateSumForce(double applyForce, double fricForce, boolean isShow, boolean isShowValue){
+        sumLabel.setText(String.format("%.0f", applyForce+fricForce) + "N");
+        sumLabel.setVisible(isShow && isShowValue);
+        if (applyForce + fricForce > 0){
+            posiSumForce.setFitWidth((applyForce + fricForce)/2);
+            sumLabel.setLayoutX(posiSumForce.getLayoutX() + posiSumForce.getFitWidth()/2);
+            posiSumForce.setVisible(isShow);
+            negaSumForce.setVisible(false);
+        } else if (applyForce+fricForce < 0) {
+            negaSumForce.setLayoutX(origin + (applyForce + fricForce)/2);
+            negaSumForce.setFitWidth((-applyForce-fricForce)/2);
+            sumLabel.setLayoutX(negaSumForce.getLayoutX() + negaSumForce.getFitWidth()/2);
+            negaSumForce.setVisible(isShow);
+            posiSumForce.setVisible(false);
+        } else {
+            sumLabel.setVisible(false);
+            posiSumForce.setVisible(false);
+            negaSumForce.setVisible(false);
+        }
+    }
+    
+    
     public void updateAllForce(double sliderValue, double friction, boolean isShowForce,boolean isShowSum, boolean isShowValue){
         this.updateAppForceVector(sliderValue, isShowForce, isShowValue);
         this.updateFrictionVector(friction, isShowForce, isShowValue);
