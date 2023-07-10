@@ -49,15 +49,31 @@ public class InfoController {
             } else {
                 anVelo.setText(0 + " */s");
             }
-            velo.setVisible(true);
-            anVelo.setVisible(true);
-            veloLabel.setVisible(true);
-            anVeloLabel.setVisible(true);
+        }
+        
+        velo.setVisible(bool);
+        anVelo.setVisible(bool);
+        veloLabel.setVisible(bool);
+        anVeloLabel.setVisible(bool);
+    }
+	
+	public void showPosi(boolean bool) {
+        if (bool){
+            posi.setText(String.format("%.2f",mainObject.getPosition()) + " m");
+            if (mainObject instanceof Cylinder){
+                anPosi.setText(String.format("%.2f", ((Cylinder) mainObject).getTheta()) + " *");
+            } else {
+                anPosi.setText(0 + " *");
+            }
+            posi.setVisible(true);
+            anPosi.setVisible(true);
+            posiLabel.setVisible(true);
+            anPosiLabel.setVisible(true);
         } else {
-            velo.setVisible(false);
-            anVelo.setVisible(false);
-            veloLabel.setVisible(false);
-            anVeloLabel.setVisible(false);
+            posi.setVisible(false);
+            anPosi.setVisible(false);
+            posiLabel.setVisible(false);
+            anPosiLabel.setVisible(false);
         }
     }
 
