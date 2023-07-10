@@ -12,9 +12,9 @@ public class ForceController implements Initializable{
 	
 	double origin;
     @FXML
-    ImageView posiAppForce, negaAppForce, posiFricForce, negaFricForce; 
+    ImageView posiAppForce, negaAppForce, posiFricForce, negaFricForce, posiSumForce, negaSumForce;
     @FXML
-    private Label appForceLabel, fricLabel;
+    private Label appForceLabel, fricLabel, sumLabel;
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,6 +93,7 @@ public class ForceController implements Initializable{
     public void updateAllForce(double sliderValue, double friction, boolean isShowForce,boolean isShowSum, boolean isShowValue){
         this.updateAppForceVector(sliderValue, isShowForce, isShowValue);
         this.updateFrictionVector(friction, isShowForce, isShowValue);
+        this.updateSumForce(sliderValue,friction, isShowSum, isShowValue);
     }
     
     
