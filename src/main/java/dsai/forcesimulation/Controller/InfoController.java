@@ -57,6 +57,7 @@ public class InfoController {
         anVeloLabel.setVisible(bool);
     }
 	
+	
 	public void showPosi(boolean bool) {
         if (bool){
             posi.setText(String.format("%.2f",mainObject.getPosition()) + " m");
@@ -65,16 +66,12 @@ public class InfoController {
             } else {
                 anPosi.setText(0 + " *");
             }
-            posi.setVisible(true);
-            anPosi.setVisible(true);
-            posiLabel.setVisible(true);
-            anPosiLabel.setVisible(true);
-        } else {
-            posi.setVisible(false);
-            anPosi.setVisible(false);
-            posiLabel.setVisible(false);
-            anPosiLabel.setVisible(false);
+            
         }
+        posi.setVisible(bool);
+        anPosi.setVisible(bool);
+        posiLabel.setVisible(bool);
+        anPosiLabel.setVisible(bool);
     }
 
 	
