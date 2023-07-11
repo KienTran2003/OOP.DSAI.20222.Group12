@@ -6,27 +6,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="dsai.forcesimulation.Controller.ForceController">
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="posiAppForce" fitHeight="60.0" fitWidth="1.0" layoutX="219.0" layoutY="74.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/rightarrow.png" />
+            <Image url="@../Image/rightarrow.png" />
          </image>
       </ImageView>
       <ImageView fx:id="negaAppForce" fitHeight="58.0" fitWidth="1.0" layoutX="219.0" layoutY="76.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/leftarrow.png" />
+            <Image url="@../Image/leftarrow.png" />
          </image>
       </ImageView>
       <ImageView fx:id="negaFricForce" fitHeight="58.0" fitWidth="1.0" layoutX="218.0" layoutY="76.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/fLeftImage.png" />
+            <Image url="@../Image/fLeftImage.png" />
          </image>
       </ImageView>
       <ImageView fx:id="posiFricForce" fitHeight="59.0" fitWidth="1.0" layoutX="219.0" layoutY="74.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/fRightIamge.png" />
+            <Image url="@../Image/fRightIamge.png" />
          </image>
       </ImageView>
       <Label fx:id="appForceLabel" layoutX="232.0" layoutY="95.0" text="0 N" visible="false">
@@ -41,12 +40,12 @@
       </Label>
       <ImageView fx:id="posiSumForce" fitHeight="58.0" fitWidth="1.0" layoutX="221.0" layoutY="10.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/sumRightArrow.png" />
+            <Image url="@../Image/sumRightArrow.png" />
          </image>
       </ImageView>
       <ImageView fx:id="negaSumForce" fitHeight="58.0" fitWidth="1.0" layoutX="220.0" layoutY="10.0" pickOnBounds="true" visible="false">
          <image>
-            <Image url="@../../../../../../../OOP.MiniProject.20222.Group_12/ForceSimulation/src/main/resources/soict/dsai/group12/forcesimulation/Image/sumLeftArrow.png" />
+            <Image url="@../Image/sumLeftArrow.png" />
          </image>
       </ImageView>
       <Label fx:id="sumLabel" layoutX="57.0" layoutY="31.0" text="0N" visible="false">
