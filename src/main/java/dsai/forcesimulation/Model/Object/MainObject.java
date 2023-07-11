@@ -65,13 +65,14 @@ public abstract class MainObject {
         //Update acceleration
         this.setAcceleration(acceleration);
         //Update position
-        this.setPosition(this.getPosition() + 0.01*this.getVelocity());
+
         //Update velocity
         if (this.getVelocity()*(this.getVelocity() + 0.01 * acceleration) < 0 ){
             this.setVelocity(0);
         } else {
             this.setVelocity(this.getVelocity() + 0.01 * acceleration);
         }
+        this.setPosition(this.getPosition() + 0.01*this.getVelocity());
     }
     public double calculateAcceleration(double appliedForce, double friction){
         return (appliedForce + friction)/this.getMass();

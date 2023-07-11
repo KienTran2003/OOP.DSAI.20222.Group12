@@ -104,8 +104,7 @@ public class SliderController implements Initializable {
     void update(){
         double appliedForce = slider.getValue();
         double friction = mainObject.calculateFriction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient());
-        double acceleration = (appliedForce + mainObject.calculateFriction(appliedForce, surface.getStaticCoefficient(), surface.getKineticCoefficient()))/mainObject.getMass();
-
+        double acceleration = mainObject.calculateAcceleration(appliedForce, friction);
 
 
         forceController.updateAllForce(slider.getValue(),friction , checkboxController.getForceBox(),checkboxController.getSumBox(), checkboxController.getValueBox());
