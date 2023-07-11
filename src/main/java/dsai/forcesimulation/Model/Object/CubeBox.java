@@ -1,7 +1,4 @@
 package dsai.forcesimulation.Model.Object;
-
-import dsai.forcesimulation.Model.Surface.Surface;
-
 public class CubeBox extends MainObject{
     public CubeBox(double sideLength, double mass){
         super(sideLength, mass);
