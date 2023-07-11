@@ -1,96 +1,81 @@
 package dsai.forcesimulation.Model.Object;
 
 import dsai.forcesimulation.Model.Surface.Surface;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class MainObject {
-    protected DoubleProperty mass = new SimpleDoubleProperty(50);
-    protected DoubleProperty position = new SimpleDoubleProperty(0);
-    protected DoubleProperty velocity = new SimpleDoubleProperty(0);
-    protected DoubleProperty acceleration = new SimpleDoubleProperty(0);
+    private double side;
+    private double mass;
+    private double position = 0;
+    private double velocity = 0;
+    private double acceleration = 0;
 
-
-    public MainObject(double mass) {
-        setMass(mass);
-    }
-
-    public double getMass() {
-        return mass.get();
-    }
-
-    public void setMass(double mass) {
-        this.mass.set(mass);
-    }
-
-    public DoubleProperty massProperty() {
-        return mass;
-    }
-
-    public double getPosition() {
-        return position.get();
-    }
-
-    public DoubleProperty positionProperty() {
-        return position;
-    }
-
-    public void setPosition(double position) {
-        this.position.set(position);
+    public MainObject(double side, double mass) {
+        this.side = side;
+        this.mass = mass;
     }
 
     public double getVelocity() {
-        return velocity.get();
-    }
-
-    public DoubleProperty velocityProperty() {
         return velocity;
     }
 
     public void setVelocity(double velocity) {
-        this.velocity.set(velocity);
+        this.velocity = velocity;
     }
 
     public double getAcceleration() {
-        return acceleration.get();
-    }
-
-    public DoubleProperty accelerationProperty() {
         return acceleration;
     }
 
     public void setAcceleration(double acceleration) {
-        this.acceleration.set(acceleration);
+        this.acceleration = acceleration;
     }
 
+    public double getSide() {
+        return side;
+    }
+
+    public void setSide(double side) {
+        this.side = side;
+    }
+
+    public double getMass() {
+        return mass;
+    }
+
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
+    public double getPosition() {
+        return position;
+    }
+
+    public void setPosition(double position) {
+        this.position = position;
+    }
     public void resetObject(){
-        setAcceleration(0);
-        setVelocity(0);
-        setPosition(0);
+        this.acceleration = 0;
+        this.velocity = 0;
+        this.position = 0;
+    }
+    public double normalForce() {
+        return 10 * mass;
     }
 
-    public abstract double calculateFrictionForces(double appliedForce, Surface surface);
-
-    public void updateAttribute(double appliedForce, Surface surface) {
-        double deltaTime = 0.01;
-        double acc = calculateAcceleration(appliedForce, surface);
-        acceleration.set(acc);
-        position.set(position.get() + velocity.get() * deltaTime);
-
-        double currentVelocity = velocity.get();
-        double newVelocity = currentVelocity + acceleration.get() * deltaTime;
-        if (currentVelocity * newVelocity <= 0) {
-            velocity.set(0); // Stop when velocity changes direction
+    public void updateAttribute(double acceleration){
+        //Update acceleration
+        this.setAcceleration(acceleration);
+        //Update position
+        this.setPosition(this.getPosition() + 0.01*this.getVelocity());
+        //Update velocity
+        if (this.getVelocity()*(this.getVelocity() + 0.01 * acceleration) < 0 ){
+            this.setVelocity(0);
         } else {
-            velocity.set(newVelocity);
+            this.setVelocity(this.getVelocity() + 0.01 * acceleration);
         }
     }
-    double calculateGravitationalForce() {
-        return this.getMass() * 10;
+    public double calculateAcceleration(double appliedForce, double friction){
+        return (appliedForce + friction)/this.getMass();
     }
+    public abstract double calculateFriction(double appliedForce, double staticCoeffient, double kineticCoefficient);
 
-    double calculateNormalForce(double gravitationalForce) {
-        return gravitationalForce;
-    }
-    protected abstract double calculateAcceleration(double appliedForce, Surface surface);
 }
