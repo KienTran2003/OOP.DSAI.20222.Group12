@@ -102,9 +102,9 @@ public class SceneController implements Initializable {
         rotation.setAngle(0); // Set rotation speed (in degrees per frame)
         circle.getTransforms().add(rotation);
 
-        recBox.setFill(new ImagePattern(new Image("C:\\Users\\Lenovo\\Desktop\\HUST\\20222\\OOP\\MiniProject\\OOP.MiniProject.20222.Group_12\\ForceSimulation\\src\\main\\resources\\soict\\dsai\\group12\\forcesimulation\\Image\\cube_image.png")));
+        recBox.setFill(new ImagePattern(new Image("https://raw.githubusercontent.com/KienTran2003/OOP.2022.Group12/master/src/main/resources/dsai/forcesimulation/Image/cube.png")));
 
-        circle.setFill(new ImagePattern(new Image("C:\\Users\\Lenovo\\Desktop\\HUST\\20222\\OOP\\MiniProject\\OOP.MiniProject.20222.Group_12\\ForceSimulation\\src\\main\\resources\\soict\\dsai\\group12\\forcesimulation\\Image\\cylinder.png")));
+        circle.setFill(new ImagePattern(new Image("https://raw.githubusercontent.com/KienTran2003/OOP.2022.Group12/master/src/main/resources/dsai/forcesimulation/Image/cylinder.png")));
         //Load road
 
         loadRoadPane();
@@ -263,19 +263,7 @@ public class SceneController implements Initializable {
                         errorAlert.showAndWait();
                         cylinderInput();
                     }
-//                    cylinder.setMass(mass);
-//                    cylinder.setSide(radius);
-//
-//                    if (recBox.getLayoutX() == 500) {
-//                        recBox.setLayoutX(300);
-//                        recBox.setLayoutY(640);
-//                    }
-//                    circle.setLayoutX(600);
-//                    circle.setLayoutY(400);
-//                    cylinder.resetObject();
-//                    sliderController.setMainObject(cylinder);
-//                    infoController.setMainObject(cylinder);
-//                    sliderController.setDisableSlider(false);
+
 
 
 
@@ -355,19 +343,7 @@ public class SceneController implements Initializable {
                         errorAlert.showAndWait();
                         cubicBoxInput();;
                     }
-//                    cubeBox.setMass(mass);
-//                    cubeBox.setSide(radius);
-//
-//                    if (circle.getLayoutX() == 600) {
-//                        circle.setLayoutX(160);
-//                        circle.setLayoutY(740);
-//                    }
-//                    recBox.setLayoutX(500);
-//                    recBox.setLayoutY(300);
-//                    cubeBox.resetObject();
-//                    sliderController.setMainObject(cubeBox);
-//                    infoController.setMainObject(cubeBox);
-//                    sliderController.setDisableSlider(false);
+
 
 
 
