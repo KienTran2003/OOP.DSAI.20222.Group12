@@ -1,5 +1,6 @@
 package dsai.forcesimulation.Controller;
 
+import dsai.forcesimulation.Model.Object.Cylinder;
 import dsai.forcesimulation.Model.Object.MainObject;
 import dsai.forcesimulation.Model.Surface.Surface;
 
@@ -69,7 +70,7 @@ public class SliderController implements Initializable {
                     update();
                 });
 
-                forceController.updateAllForce(slider.getValue(), mainObject.friction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient()), checkboxController.getForceBox(),checkboxController.getSumBox(), checkboxController.getValueBox());
+                forceController.updateAllForce(slider.getValue(), mainObject.calculateFriction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient()), checkboxController.getForceBox(),checkboxController.getSumBox(), checkboxController.getValueBox());
 
                 sliderTimeline = new Timeline(newKeyFrame);
                 sliderTimeline.setCycleCount(Animation.INDEFINITE);
@@ -85,7 +86,7 @@ public class SliderController implements Initializable {
             String formattedValue = String.format("%.0f", slider.getValue());
             forceLabel.setText(formattedValue + " newtons");
 
-            forceController.updateAllForce(slider.getValue(), mainObject.friction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient()), checkboxController.getForceBox(),checkboxController.getSumBox(), checkboxController.getValueBox());
+            forceController.updateAllForce(slider.getValue(), mainObject.calculateFriction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient()), checkboxController.getForceBox(),checkboxController.getSumBox(), checkboxController.getValueBox());
 
 
 
@@ -102,8 +103,8 @@ public class SliderController implements Initializable {
 
     void update(){
         double appliedForce = slider.getValue();
-        double friction = mainObject.friction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient());
-        double acceleration = (appliedForce + mainObject.friction(appliedForce, surface.getStaticCoefficient(), surface.getKineticCoefficient()))/mainObject.getMass();
+        double friction = mainObject.calculateFriction(slider.getValue(), surface.getStaticCoefficient(), surface.getKineticCoefficient());
+        double acceleration = (appliedForce + mainObject.calculateFriction(appliedForce, surface.getStaticCoefficient(), surface.getKineticCoefficient()))/mainObject.getMass();
 
 
 
