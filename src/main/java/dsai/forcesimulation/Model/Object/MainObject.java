@@ -1,19 +1,15 @@
 package dsai.forcesimulation.Model.Object;
 
-import dsai.forcesimulation.Model.Surface.Surface;
-
 public abstract class MainObject {
     private double side;
     private double mass;
     private double position = 0;
     private double velocity = 0;
     private double acceleration = 0;
-
     public MainObject(double side, double mass) {
         this.side = side;
         this.mass = mass;
     }
-
     public double getVelocity() {
         return velocity;
     }
@@ -64,14 +60,13 @@ public abstract class MainObject {
     public void updateAttribute(double acceleration){
         //Update acceleration
         this.setAcceleration(acceleration);
-        //Update position
-
         //Update velocity
         if (this.getVelocity()*(this.getVelocity() + 0.01 * acceleration) < 0 ){
             this.setVelocity(0);
         } else {
             this.setVelocity(this.getVelocity() + 0.01 * acceleration);
         }
+        //Update position
         this.setPosition(this.getPosition() + 0.01*this.getVelocity());
     }
     public double calculateAcceleration(double appliedForce, double friction){

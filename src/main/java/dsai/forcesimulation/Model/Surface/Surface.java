@@ -4,13 +4,10 @@ public class Surface {
     private double staticCoefficient = 0;
     private double kineticCoefficient = 0;
 
-    public Surface(){}
     public Surface(double staticCoefficient, double kineticCoefficient){
         this.staticCoefficient = staticCoefficient;
         this.kineticCoefficient = kineticCoefficient;
     }
-
-
     public double getStaticCoefficient() {
         return staticCoefficient;
     }
