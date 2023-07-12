@@ -198,7 +198,6 @@ public class SceneController implements Initializable {
             if (cubeBox.getVelocity() == 0){
                 cylinderInput();
             }
-
         }
     }
 
@@ -418,14 +417,3 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-    public void loadBackgroundPane(){
-        FXMLLoader loaderBackground = new FXMLLoader(getClass().getResource("background.fxml"));
-        backgroundController = new BackgroundController();
-        loaderBackground.setController(backgroundController);
-        try {
-            backgroundPane.getChildren().add(loaderBackground.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-}
