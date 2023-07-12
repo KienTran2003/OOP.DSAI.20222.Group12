@@ -428,6 +428,4 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-
 }
