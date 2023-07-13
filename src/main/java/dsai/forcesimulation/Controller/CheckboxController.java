@@ -7,7 +7,7 @@ import javafx.scene.control.CheckBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CheckboxController implements Initializable {
+public class CheckboxController {
 
     @FXML
     private CheckBox forceBox, sumBox, valueBox, massBox, accelerateBox, veloBox, posiBox;
@@ -34,8 +34,5 @@ public class CheckboxController implements Initializable {
         return posiBox.isSelected();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    }
 }
