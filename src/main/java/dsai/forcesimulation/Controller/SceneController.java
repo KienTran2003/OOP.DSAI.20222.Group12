@@ -209,8 +209,8 @@ public class SceneController implements Initializable {
         gridPane.setVgap(10); // Set vertical gap between elements
 
         // Create labels for mass and radius
-        Label massLabel = new Label("Mass:");
-        Label radiusLabel = new Label("Radius:");
+        Label massLabel = new Label("Mass: (0<Mass<50)");
+        Label radiusLabel = new Label("Radius: (0<Radius<100)");
 
         // Create text fields for mass and radius
         TextField massTextField = new TextField();
@@ -289,8 +289,8 @@ public class SceneController implements Initializable {
         gridPane.setVgap(10); // Set vertical gap between elements
 
         // Create labels for mass and radius
-        Label massLabel = new Label("Mass:");
-        Label radiusLabel = new Label("Side Length:");
+        Label massLabel = new Label("Mass: (0<Mass<50)");
+        Label radiusLabel = new Label("Side Length: (0<Length<100)");
 
         // Create text fields for mass and radius
         TextField massTextField = new TextField();
