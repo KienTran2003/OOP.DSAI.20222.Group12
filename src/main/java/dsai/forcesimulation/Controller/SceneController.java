@@ -198,7 +198,6 @@ public class SceneController implements Initializable {
             if (cubeBox.getVelocity() == 0){
                 cylinderInput();
             }
-
         }
     }
 
@@ -428,6 +427,4 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-
 }
