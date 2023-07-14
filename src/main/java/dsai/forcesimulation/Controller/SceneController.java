@@ -94,6 +94,7 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialization Logic
         surface = new Surface(0,0);
         cubeBox = new CubeBox(20, 20);
         cylinder = new Cylinder(5, 20);
@@ -146,7 +147,7 @@ public class SceneController implements Initializable {
     }
     @FXML
     void btnStopPressed(){
-
+        // Event Handler for the "Stop" button
         if (timeline.getStatus() == Animation.Status.RUNNING){
             timeline.stop();
             btnStop.setText("Play");
@@ -159,6 +160,7 @@ public class SceneController implements Initializable {
 
     @FXML
     void btnRestartPressed(){
+        // Event Handler for the "Restart" button
         sliderController.getMainObject().resetObject();
         roadController.restartRoad();
         btnStop.setText("Stop");
@@ -170,6 +172,7 @@ public class SceneController implements Initializable {
     }
     @FXML
     void setBox(){
+        // Event Handler for setting the properties of a cube-shaped object
         if (recBox.getLayoutX() == 500){
             if (cubeBox.getVelocity() == 0) {
                 recBox.setLayoutX(300);
