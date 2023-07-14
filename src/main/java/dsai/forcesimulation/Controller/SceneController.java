@@ -170,9 +170,9 @@ public class SceneController implements Initializable {
         staticSlider.setValue(0);
         timeline.play();
     }
+    // Event Handler for setting the properties of a cube-shaped object
     @FXML
     void setBox(){
-        // Event Handler for setting the properties of a cube-shaped object
         if (recBox.getLayoutX() == 500){
             if (cubeBox.getVelocity() == 0) {
                 recBox.setLayoutX(300);
@@ -188,6 +188,7 @@ public class SceneController implements Initializable {
 
         }
     }
+    // Event Handler for setting the properties of a cylinder-shaped object
     @FXML
     void setCylinder(){
         if (circle.getLayoutX() == 600){
@@ -203,7 +204,7 @@ public class SceneController implements Initializable {
             }
         }
     }
-
+    // Helper method for handling user input when setting cylinder properties
     void cylinderInput(){
 
         GridPane gridPane = new GridPane();
@@ -285,6 +286,7 @@ public class SceneController implements Initializable {
         });
 
     }
+    // Helper method for handling user input when setting cube box properties
     void cubicBoxInput(){
         GridPane gridPane = new GridPane();
 
@@ -363,6 +365,7 @@ public class SceneController implements Initializable {
 
         });
     }
+    // Helper method for loading the road pane and its associated controller
     public void loadRoadPane(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("road.fxml"));
 
