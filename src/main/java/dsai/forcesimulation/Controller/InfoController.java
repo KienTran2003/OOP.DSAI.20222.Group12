@@ -25,57 +25,66 @@ public class InfoController {
 	}
 	
 	public void showAccelerate(boolean bool) {
-
-		if (bool){
-			accelerate.setText(String.format("%.2f",mainObject.getAcceleration()) + " m/s^2");
-			if (mainObject instanceof Cylinder){
-				anAccelerate.setText(String.format("%.2f",((Cylinder) mainObject).getGamma()) + " */s^2");
-			} else {
-				anAccelerate.setText(0 + " */s^2");
-			}
-			accelerate.setVisible(true);
-			anAccelerate.setVisible(true);
-			accLabel.setVisible(true);
-			anAccLabel.setVisible(true);
+		/*
+		 * take a boolean value as an argument. 
+		 * If the argument is true, 
+		 * the methods set the text of the acceleration labels and display information. 
+		 * If the mainObject is an instance of the Cylinder class, 
+		 * additional information is displayed. 
+		 * 
+		 */
+		accelerate.setText(String.format("%.2f",mainObject.getAcceleration()) + " m/s^2");
+		if (mainObject instanceof Cylinder){
+			anAccelerate.setText(String.format("%.2f",((Cylinder) mainObject).getGamma()) + " */s^2");
 		} else {
-			accelerate.setVisible(false);
-			anAccelerate.setVisible(false);
-			accLabel.setVisible(false);
-			anAccLabel.setVisible(false);
+			anAccelerate.setText(0 + " */s^2");
 		}
+		
+		accelerate.setVisible(bool);
+		anAccelerate.setVisible(bool);
+		accLabel.setVisible(bool);
+		anAccLabel.setVisible(bool);
 	}
 	
 	public void showVelo(boolean bool) {
-        if (bool){
-			velo.setText(String.format("%.2f",mainObject.getVelocity()) + " m/s");
-			if (mainObject instanceof Cylinder){
-				anVelo.setText(String.format("%.2f",((Cylinder) mainObject).getOmega()) + " */s");
-			} else {
-				anVelo.setText(0 + " */s");
-			}
-			velo.setVisible(true);
-			anVelo.setVisible(true);
-			veloLabel.setVisible(true);
-			anVeloLabel.setVisible(true);
+		/*
+		 * take a boolean value as an argument. 
+		 * If the argument is true, 
+		 * the methods set the text of the velocity labels and display information. 
+		 * If the mainObject is an instance of the Cylinder class, 
+		 * additional information is displayed. 
+		 * 
+		 */
+		velo.setText(String.format("%.2f",mainObject.getVelocity()) + " m/s");
+		if (mainObject instanceof Cylinder){
+			anVelo.setText(String.format("%.2f",((Cylinder) mainObject).getOmega()) + " */s");
 		} else {
-			velo.setVisible(false);
-			anVelo.setVisible(false);
-			veloLabel.setVisible(false);
-			anVeloLabel.setVisible(false);
+			anVelo.setText(0 + " */s");
 		}
+		
+		velo.setVisible(bool);
+		anVelo.setVisible(bool);
+		veloLabel.setVisible(bool);
+		anVeloLabel.setVisible(bool);
     }
 	
 	
 	public void showPosi(boolean bool) {
-        if (bool){
-            posi.setText(String.format("%.2f",mainObject.getPosition()) + " m");
-            if (mainObject instanceof Cylinder){
-                anPosi.setText(String.format("%.2f", ((Cylinder) mainObject).getTheta()) + " *");
-            } else {
-                anPosi.setText(0 + " *");
-            }
-            
+		/*
+		 * take a boolean value as an argument. 
+		 * If the argument is true, 
+		 * the methods set the text of the position labels and display information. 
+		 * If the mainObject is an instance of the Cylinder class, 
+		 * additional information is displayed. 
+		 * 
+		 */
+		posi.setText(String.format("%.2f",mainObject.getPosition()) + " m");
+        if (mainObject instanceof Cylinder){
+            anPosi.setText(String.format("%.2f", ((Cylinder) mainObject).getTheta()) + " *");
+        } else {
+            anPosi.setText(0 + " *");
         }
+        
         posi.setVisible(bool);
         anPosi.setVisible(bool);
         posiLabel.setVisible(bool);
