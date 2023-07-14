@@ -17,7 +17,14 @@ public class RoadController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recList = new Rectangle[]{rec1, rec2, rec3, rec4, rec5, rec6, rec7, rec8, rec9, rec10, rec11, rec12};
     }
+    
+ 
     public void move(double deltaX){
+    	/* 
+    	 * Moves each rectangle in the recList array by that amount along the x-axis. 
+    	 * If a rectangle moves beyond the left or right limits of the screen, 
+    	 * its position is reset to the opposite side of the screen. 
+    	 */
         for (Rectangle rec: recList){
         	int leftLimit = -180; // = - (100 + 40 + 40), 
         							// 100 is the width of a rectangle; 40 is the distance between rectangles
@@ -31,7 +38,13 @@ public class RoadController implements Initializable {
             }
         }
     }
+    
     public void restartRoad(){
+    	/*
+    	 * resets the position of each rectangle in the recList array to 
+    	 * its initial position
+    	 * 
+    	 */
         for (int i = 0; i< recList.length; i++){
             recList[i].setLayoutX(i*140 - 140);
         }
