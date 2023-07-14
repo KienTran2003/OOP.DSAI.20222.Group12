@@ -377,6 +377,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the vector pane and its associated controller
     public void loadVectorPane(){
         FXMLLoader loaderVector = new FXMLLoader(getClass().getResource("force.fxml"));
         forceController = new ForceController();
@@ -387,6 +388,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the checkbox pane and its associated controller
     public void loadCheckBoxPane(){
         FXMLLoader loaderCheckBox = new FXMLLoader(getClass().getResource("checkbox.fxml"));
         checkboxController = new CheckboxController();
@@ -397,6 +399,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the slider pane and its associated controller
     public void loadSliderPane(){
         FXMLLoader loaderSlider = new FXMLLoader(getClass().getResource("slider.fxml"));
 
@@ -410,6 +413,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the info pane and its associated controller
     public void loadInfoPane(){
         FXMLLoader loaderInfo = new FXMLLoader(getClass().getResource("info.fxml"));
 
@@ -423,6 +427,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the background pane and its associated controller
     public void loadBackgroundPane(){
         FXMLLoader loaderBackground = new FXMLLoader(getClass().getResource("background.fxml"));
         backgroundController = new BackgroundController();
