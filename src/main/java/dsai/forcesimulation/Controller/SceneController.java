@@ -130,15 +130,27 @@ public class SceneController implements Initializable {
         //Set funtion on slider to change friction coefficient
         staticSlider.setOnMouseDragged(e -> {
             surface.setStaticCoefficient(staticSlider.getValue());
+            if (kineticSlider.getValue() >= staticSlider.getValue()) {
+                kineticSlider.setValue(staticSlider.getValue() - 0.1);
+            }
         });
         staticSlider.setOnMouseClicked(e -> {
             surface.setStaticCoefficient(staticSlider.getValue());
+            if (kineticSlider.getValue() >= staticSlider.getValue()) {
+                kineticSlider.setValue(staticSlider.getValue() - 0.1);
+            }
         });
         kineticSlider.setOnMouseDragged(e -> {
             surface.setKineticCoefficient(kineticSlider.getValue());
+            if (kineticSlider.getValue() >= staticSlider.getValue()) {
+                kineticSlider.setValue(staticSlider.getValue() - 0.1);
+            }
         });
         kineticSlider.setOnMouseClicked(e -> {
             surface.setKineticCoefficient(kineticSlider.getValue());
+            if (kineticSlider.getValue() >= staticSlider.getValue()) {
+                kineticSlider.setValue(staticSlider.getValue() - 0.1);
+            }
         });
 
         timeline.setCycleCount(Animation.INDEFINITE);
