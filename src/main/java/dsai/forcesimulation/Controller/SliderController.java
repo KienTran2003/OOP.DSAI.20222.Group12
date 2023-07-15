@@ -56,7 +56,10 @@ public class SliderController implements Initializable {
 
 
         slider.setOnMouseDragged(e -> {                 //Set action when mouse drag in slider
-
+            /* When mouse is dragged on tge slider, we set slider equals value of slider
+             *To make this system continuously receives applied force if there is nothing change, we need to create a paralleled timeline
+             * to update attribute of object
+             */
             if (mainObject.getVelocity() > 50 && slider.getValue() > 0){        //Set applied force = 0 when velocity of object exceed max velocity
                 this.slider.setValue(0);
 
@@ -80,6 +83,11 @@ public class SliderController implements Initializable {
 
         });
         slider.setOnMouseReleased(e -> {                //Set action when mouse is released from slider
+            /* When mouse is released from slider, we set slider equals 0 mean applied force = 0
+            *To make this system continuously receives applied force (equal 0) we need to create a paralleled timeline
+            * to update attribute of object
+             */
+
             slider.setValue(0);
             String formattedValue = String.format("%.0f", slider.getValue());
             forceLabel.setText(formattedValue + " newtons");
@@ -119,6 +127,9 @@ public class SliderController implements Initializable {
     }
     //Limit velocity of object
     void updateLimitVelo(){
+        /*
+        If velocity of object is exceed max velocity we need to set applied force equal 0 mean slider value = 0
+         */
         if (mainObject.getVelocity() > MAX_SPEED && slider.getValue() > 0){
             this.slider.setValue(0);
         } else if (mainObject.getVelocity() < -MAX_SPEED && slider.getValue() < 0) {

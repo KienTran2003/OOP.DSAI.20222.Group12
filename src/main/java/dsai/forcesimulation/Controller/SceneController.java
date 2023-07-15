@@ -68,12 +68,13 @@ public class SceneController implements Initializable {
     Slider staticSlider, kineticSlider;
 
     KeyFrame keyFrame = new KeyFrame(originalDuration, event -> {
-        roadController.move(sliderController.getMainObject().getVelocity());
+        roadController.move(sliderController.getMainObject().getVelocity());    //Moving object by moving road by the opposite direction.
 
 
-        rotation.setAngle(rotation.getAngle() + cylinder.getVelocity());
-        textMass.setText(sliderController.getMainObject().getMass() + " Kg");
-        if (recBox.getLayoutX() == 500 || circle.getLayoutX() == 600){
+        rotation.setAngle(rotation.getAngle() + cylinder.getVelocity());        //Set rotation of cylinder
+        textMass.setText(sliderController.getMainObject().getMass() + " Kg");   //Set mass of object
+
+        if (recBox.getLayoutX() == 500 || circle.getLayoutX() == 600){          //Check to show mass label if object is in the road
             textMass.setVisible(checkboxController.getMassBox());
         }
         infoController.showAccelerate(checkboxController.getAccelerateBox());
@@ -95,16 +96,19 @@ public class SceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialization Logic
+        //Create default object, surface for this system
         surface = new Surface(0,0);
         cubeBox = new CubeBox(20, 20);
         cylinder = new Cylinder(5, 20);
+
+        //Set pivot for cylinder
         rotation.setPivotX(circle.getCenterX()); // Set pivot point at the center of the circle
         rotation.setPivotY(circle.getCenterY());
         rotation.setAngle(0); // Set rotation speed (in degrees per frame)
         circle.getTransforms().add(rotation);
 
+        //Set image for object
         recBox.setFill(new ImagePattern(new Image("https://raw.githubusercontent.com/KienTran2003/OOP.2022.Group12/master/src/main/resources/dsai/forcesimulation/Image/cube.png")));
-
         circle.setFill(new ImagePattern(new Image("https://raw.githubusercontent.com/KienTran2003/OOP.2022.Group12/master/src/main/resources/dsai/forcesimulation/Image/cylinder.png")));
         //Load road
 
@@ -194,7 +198,11 @@ public class SceneController implements Initializable {
     }
     @FXML
     void btnStopPressed(){
-        // Event Handler for the "Stop" button
+        /*
+        *Event Handler for the "Stop" button
+        * If the main object is running, this button is used for stop
+        * It the main object is stop, this button is used for running again.
+         */
         if (timeline.getStatus() == Animation.Status.RUNNING){
             timeline.stop();
             btnStop.setText("Play");
@@ -207,7 +215,10 @@ public class SceneController implements Initializable {
 
     @FXML
     void btnRestartPressed(){
-        // Event Handler for the "Restart" button
+        /*
+        *Event Handler for the "Restart" button
+        * Restart the status from beginning
+         */
         sliderController.getMainObject().resetObject();
         roadController.restartRoad();
         btnStop.setText("Stop");
@@ -217,9 +228,15 @@ public class SceneController implements Initializable {
         staticSlider.setValue(0);
         timeline.play();
     }
-    // Event Handler for setting the properties of a cube-shaped object
+
     @FXML
     void setBox(){
+        /*
+        *This function is to set location of cubebox
+        * When we click on the cubebox
+        * If it is in the prepared box, it moves to the road
+        * Otherwise, it is returned to prepared box
+         */
         if (recBox.getLayoutX() == 500){
             if (cubeBox.getVelocity() == 0) {
                 recBox.setLayoutX(300);
@@ -235,9 +252,15 @@ public class SceneController implements Initializable {
 
         }
     }
-    // Event Handler for setting the properties of a cylinder-shaped object
+
     @FXML
     void setCylinder(){
+        /*
+         *This function is to set location of cylinder
+         * When we click on the cylinder
+         * If it is in the prepared box, it moves to the road
+         * Otherwise, it is returned to prepared box
+         */
         if (circle.getLayoutX() == 600){
             if (cylinder.getVelocity() == 0) {
                 circle.setLayoutX(160);
