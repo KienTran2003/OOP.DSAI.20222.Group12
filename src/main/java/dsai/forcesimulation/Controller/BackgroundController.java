@@ -21,6 +21,9 @@ public class BackgroundController implements Initializable {
 
     //Move background
     public void move(double velocity){
+        /*
+        *Move background based on direction of the main object
+         */
         if (velocity>0){
             velo = 0.2;
         } else if (velocity < 0) {
