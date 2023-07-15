@@ -159,8 +159,13 @@ public class SceneController implements Initializable {
             // Adjust kinetic coefficient if necessary
             if (staticValue <= kineticSlider.getValue()) {
                 double newKineticValue = staticValue - 0.1;
-                kineticSlider.setValue(newKineticValue);
-                surface.setKineticCoefficient(newKineticValue);
+                if (newKineticValue < 0){
+                    surface.setKineticCoefficient(0);
+                    kineticSlider.setValue(0);
+                } else {
+                    kineticSlider.setValue(newKineticValue);
+                    surface.setKineticCoefficient(newKineticValue);
+                }
             }
         });
 
@@ -171,8 +176,14 @@ public class SceneController implements Initializable {
             // Adjust kinetic coefficient if necessary
             if (staticValue <= kineticSlider.getValue()) {
                 double newKineticValue = staticValue - 0.1;
-                kineticSlider.setValue(newKineticValue);
-                surface.setKineticCoefficient(newKineticValue);
+                if (newKineticValue < 0){
+                    surface.setKineticCoefficient(0);
+                    kineticSlider.setValue(0);
+                } else {
+                    kineticSlider.setValue(newKineticValue);
+                    surface.setKineticCoefficient(newKineticValue);
+                }
+
             }
         });
 
@@ -298,7 +309,7 @@ public class SceneController implements Initializable {
                         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                         errorAlert.setTitle("Invalid Input");
                         errorAlert.setHeaderText(null);
-                        errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values.");
+                        errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values that lie in correct ranges.");
                         errorAlert.showAndWait();
                         cylinderInput();
                     }
@@ -313,7 +324,7 @@ public class SceneController implements Initializable {
                     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                     errorAlert.setTitle("Invalid Input");
                     errorAlert.setHeaderText(null);
-                    errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values that lie in correct ranges.");
+                    errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values.");
                     errorAlert.showAndWait();
                     cylinderInput();
                 }
