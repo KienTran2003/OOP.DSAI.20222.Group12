@@ -127,19 +127,55 @@ public class SceneController implements Initializable {
         loadBackgroundPane();
 
 
-        //Set funtion on slider to change friction coefficient
-        staticSlider.setOnMouseDragged(e -> {
-            surface.setStaticCoefficient(staticSlider.getValue());
-        });
-        staticSlider.setOnMouseClicked(e -> {
-            surface.setStaticCoefficient(staticSlider.getValue());
-        });
+        // Set function on slider to change friction coefficient
         kineticSlider.setOnMouseDragged(e -> {
-            surface.setKineticCoefficient(kineticSlider.getValue());
+            double kineticValue = kineticSlider.getValue();
+            surface.setKineticCoefficient(kineticValue);
+
+            // Adjust static coefficient if necessary
+            if (kineticValue >= staticSlider.getValue()) {
+                double newStaticValue = kineticValue + 0.1;
+                staticSlider.setValue(newStaticValue);
+                surface.setStaticCoefficient(newStaticValue);
+            }
         });
+
         kineticSlider.setOnMouseClicked(e -> {
-            surface.setKineticCoefficient(kineticSlider.getValue());
+            double kineticValue = kineticSlider.getValue();
+            surface.setKineticCoefficient(kineticValue);
+
+            // Adjust static coefficient if necessary
+            if (kineticValue >= staticSlider.getValue()) {
+                double newStaticValue = kineticValue + 0.1;
+                staticSlider.setValue(newStaticValue);
+                surface.setStaticCoefficient(newStaticValue);
+            }
         });
+
+        staticSlider.setOnMouseDragged(e -> {
+            double staticValue = staticSlider.getValue();
+            surface.setStaticCoefficient(staticValue);
+
+            // Adjust kinetic coefficient if necessary
+            if (staticValue <= kineticSlider.getValue()) {
+                double newKineticValue = staticValue - 0.1;
+                kineticSlider.setValue(newKineticValue);
+                surface.setKineticCoefficient(newKineticValue);
+            }
+        });
+
+        staticSlider.setOnMouseClicked(e -> {
+            double staticValue = staticSlider.getValue();
+            surface.setStaticCoefficient(staticValue);
+
+            // Adjust kinetic coefficient if necessary
+            if (staticValue <= kineticSlider.getValue()) {
+                double newKineticValue = staticValue - 0.1;
+                kineticSlider.setValue(newKineticValue);
+                surface.setKineticCoefficient(newKineticValue);
+            }
+        });
+
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
