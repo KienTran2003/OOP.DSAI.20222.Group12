@@ -94,6 +94,7 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialization Logic
         surface = new Surface(0,0);
         cubeBox = new CubeBox(20, 20);
         cylinder = new Cylinder(5, 20);
@@ -146,7 +147,7 @@ public class SceneController implements Initializable {
     }
     @FXML
     void btnStopPressed(){
-
+        // Event Handler for the "Stop" button
         if (timeline.getStatus() == Animation.Status.RUNNING){
             timeline.stop();
             btnStop.setText("Play");
@@ -159,6 +160,7 @@ public class SceneController implements Initializable {
 
     @FXML
     void btnRestartPressed(){
+        // Event Handler for the "Restart" button
         sliderController.getMainObject().resetObject();
         roadController.restartRoad();
         btnStop.setText("Stop");
@@ -168,6 +170,7 @@ public class SceneController implements Initializable {
         staticSlider.setValue(0);
         timeline.play();
     }
+    // Event Handler for setting the properties of a cube-shaped object
     @FXML
     void setBox(){
         if (recBox.getLayoutX() == 500){
@@ -185,6 +188,7 @@ public class SceneController implements Initializable {
 
         }
     }
+    // Event Handler for setting the properties of a cylinder-shaped object
     @FXML
     void setCylinder(){
         if (circle.getLayoutX() == 600){
@@ -200,7 +204,7 @@ public class SceneController implements Initializable {
             }
         }
     }
-
+    // Helper method for handling user input when setting cylinder properties
     void cylinderInput(){
 
         GridPane gridPane = new GridPane();
@@ -282,6 +286,7 @@ public class SceneController implements Initializable {
         });
 
     }
+    // Helper method for handling user input when setting cube box properties
     void cubicBoxInput(){
         GridPane gridPane = new GridPane();
 
@@ -360,6 +365,7 @@ public class SceneController implements Initializable {
 
         });
     }
+    // Helper method for loading the road pane and its associated controller
     public void loadRoadPane(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("road.fxml"));
 
@@ -371,6 +377,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the vector pane and its associated controller
     public void loadVectorPane(){
         FXMLLoader loaderVector = new FXMLLoader(getClass().getResource("force.fxml"));
         forceController = new ForceController();
@@ -381,6 +388,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the checkbox pane and its associated controller
     public void loadCheckBoxPane(){
         FXMLLoader loaderCheckBox = new FXMLLoader(getClass().getResource("checkbox.fxml"));
         checkboxController = new CheckboxController();
@@ -391,6 +399,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the slider pane and its associated controller
     public void loadSliderPane(){
         FXMLLoader loaderSlider = new FXMLLoader(getClass().getResource("slider.fxml"));
 
@@ -404,6 +413,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the info pane and its associated controller
     public void loadInfoPane(){
         FXMLLoader loaderInfo = new FXMLLoader(getClass().getResource("info.fxml"));
 
@@ -417,6 +427,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the background pane and its associated controller
     public void loadBackgroundPane(){
         FXMLLoader loaderBackground = new FXMLLoader(getClass().getResource("background.fxml"));
         backgroundController = new BackgroundController();
