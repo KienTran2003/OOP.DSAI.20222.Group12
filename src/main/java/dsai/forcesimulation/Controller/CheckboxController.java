@@ -12,6 +12,8 @@ public class CheckboxController {
     @FXML
     private CheckBox forceBox, sumBox, valueBox, massBox, accelerateBox, veloBox, posiBox;
 
+    //Get the status of the checkbox whether they are selected.
+
     public boolean getForceBox(){
         return forceBox.isSelected();
     }
