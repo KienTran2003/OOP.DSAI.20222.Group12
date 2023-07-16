@@ -29,8 +29,8 @@ public class ForceController implements Initializable{
     public void updateAppForceVector(double applyForce, boolean isShow, boolean isShowValue){
         /*
          * update the display of the applied force vectors. 
-         * The first boolean value determines whether or not the vector is visible. 
-         * The second boolean value determines whether or not the corresponding label 
+         * The first boolean value determines whether the vector is visible.
+         * The second boolean value determines whether the corresponding label
          * is visible. 
          * 
          */
