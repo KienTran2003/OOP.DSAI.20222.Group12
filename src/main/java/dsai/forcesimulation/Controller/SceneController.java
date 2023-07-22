@@ -68,12 +68,13 @@ public class SceneController implements Initializable {
     Slider staticSlider, kineticSlider;
 
     KeyFrame keyFrame = new KeyFrame(originalDuration, event -> {
-        roadController.move(sliderController.getMainObject().getVelocity());
+        roadController.move(sliderController.getMainObject().getVelocity());    //Moving object by moving road by the opposite direction.
 
 
-        rotation.setAngle(rotation.getAngle() + cylinder.getVelocity());
-        textMass.setText(sliderController.getMainObject().getMass() + " Kg");
-        if (recBox.getLayoutX() == 500 || circle.getLayoutX() == 600){
+        rotation.setAngle(rotation.getAngle() + cylinder.getVelocity());        //Set rotation of cylinder
+        textMass.setText(sliderController.getMainObject().getMass() + " Kg");   //Set mass of object
+
+        if (recBox.getLayoutX() == 500 || circle.getLayoutX() == 600){          //Check to show mass label if object is in the road
             textMass.setVisible(checkboxController.getMassBox());
         }
         infoController.showAccelerate(checkboxController.getAccelerateBox());
@@ -94,16 +95,20 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialization Logic
+        //Create default object, surface for this system
         surface = new Surface(0,0);
         cubeBox = new CubeBox(20, 20);
         cylinder = new Cylinder(5, 20);
+
+        //Set pivot for cylinder
         rotation.setPivotX(circle.getCenterX()); // Set pivot point at the center of the circle
         rotation.setPivotY(circle.getCenterY());
         rotation.setAngle(0); // Set rotation speed (in degrees per frame)
         circle.getTransforms().add(rotation);
 
+        //Set image for object
         recBox.setFill(new ImagePattern(new Image("https://raw.githubusercontent.com/KienTran2003/OOP.2022.Group12/master/src/main/resources/dsai/forcesimulation/Image/cube.png")));
-
         circle.setFill(new ImagePattern(new Image("https://raw.githubusercontent.com/KienTran2003/OOP.2022.Group12/master/src/main/resources/dsai/forcesimulation/Image/cylinder.png")));
         //Load road
 
@@ -126,19 +131,66 @@ public class SceneController implements Initializable {
         loadBackgroundPane();
 
 
-        //Set funtion on slider to change friction coefficient
-        staticSlider.setOnMouseDragged(e -> {
-            surface.setStaticCoefficient(staticSlider.getValue());
-        });
-        staticSlider.setOnMouseClicked(e -> {
-            surface.setStaticCoefficient(staticSlider.getValue());
-        });
+        // Set function on slider to change friction coefficient
         kineticSlider.setOnMouseDragged(e -> {
-            surface.setKineticCoefficient(kineticSlider.getValue());
+            double kineticValue = kineticSlider.getValue();
+            surface.setKineticCoefficient(kineticValue);
+
+            // Adjust static coefficient if necessary
+            if (kineticValue >= staticSlider.getValue()) {
+                double newStaticValue = kineticValue + 0.1;
+                staticSlider.setValue(newStaticValue);
+                surface.setStaticCoefficient(newStaticValue);
+            }
         });
+
         kineticSlider.setOnMouseClicked(e -> {
-            surface.setKineticCoefficient(kineticSlider.getValue());
+            double kineticValue = kineticSlider.getValue();
+            surface.setKineticCoefficient(kineticValue);
+
+            // Adjust static coefficient if necessary
+            if (kineticValue >= staticSlider.getValue()) {
+                double newStaticValue = kineticValue + 0.1;
+                staticSlider.setValue(newStaticValue);
+                surface.setStaticCoefficient(newStaticValue);
+            }
         });
+
+        staticSlider.setOnMouseDragged(e -> {
+            double staticValue = staticSlider.getValue();
+            surface.setStaticCoefficient(staticValue);
+
+            // Adjust kinetic coefficient if necessary
+            if (staticValue <= kineticSlider.getValue()) {
+                double newKineticValue = staticValue - 0.1;
+                if (newKineticValue < 0){
+                    surface.setKineticCoefficient(0);
+                    kineticSlider.setValue(0);
+                } else {
+                    kineticSlider.setValue(newKineticValue);
+                    surface.setKineticCoefficient(newKineticValue);
+                }
+            }
+        });
+
+        staticSlider.setOnMouseClicked(e -> {
+            double staticValue = staticSlider.getValue();
+            surface.setStaticCoefficient(staticValue);
+
+            // Adjust kinetic coefficient if necessary
+            if (staticValue <= kineticSlider.getValue()) {
+                double newKineticValue = staticValue - 0.1;
+                if (newKineticValue < 0){
+                    surface.setKineticCoefficient(0);
+                    kineticSlider.setValue(0);
+                } else {
+                    kineticSlider.setValue(newKineticValue);
+                    surface.setKineticCoefficient(newKineticValue);
+                }
+
+            }
+        });
+
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -146,7 +198,11 @@ public class SceneController implements Initializable {
     }
     @FXML
     void btnStopPressed(){
-
+        /*
+        *Event Handler for the "Stop" button
+        * If the main object is running, this button is used for stop
+        * It the main object is stop, this button is used for running again.
+         */
         if (timeline.getStatus() == Animation.Status.RUNNING){
             timeline.stop();
             btnStop.setText("Play");
@@ -159,6 +215,10 @@ public class SceneController implements Initializable {
 
     @FXML
     void btnRestartPressed(){
+        /*
+        *Event Handler for the "Restart" button
+        * Restart the status from beginning
+         */
         sliderController.getMainObject().resetObject();
         roadController.restartRoad();
         btnStop.setText("Stop");
@@ -168,8 +228,15 @@ public class SceneController implements Initializable {
         staticSlider.setValue(0);
         timeline.play();
     }
+
     @FXML
     void setBox(){
+        /*
+        *This function is to set location of cubebox
+        * When we click on the cubebox
+        * If it is in the prepared box, it moves to the road
+        * Otherwise, it is returned to prepared box
+         */
         if (recBox.getLayoutX() == 500){
             if (cubeBox.getVelocity() == 0) {
                 recBox.setLayoutX(300);
@@ -185,8 +252,15 @@ public class SceneController implements Initializable {
 
         }
     }
+
     @FXML
     void setCylinder(){
+        /*
+         *This function is to set location of cylinder
+         * When we click on the cylinder
+         * If it is in the prepared box, it moves to the road
+         * Otherwise, it is returned to prepared box
+         */
         if (circle.getLayoutX() == 600){
             if (cylinder.getVelocity() == 0) {
                 circle.setLayoutX(160);
@@ -198,10 +272,9 @@ public class SceneController implements Initializable {
             if (cubeBox.getVelocity() == 0){
                 cylinderInput();
             }
-
         }
     }
-
+    // Helper method for handling user input when setting cylinder properties
     void cylinderInput(){
 
         GridPane gridPane = new GridPane();
@@ -210,8 +283,8 @@ public class SceneController implements Initializable {
         gridPane.setVgap(10); // Set vertical gap between elements
 
         // Create labels for mass and radius
-        Label massLabel = new Label("Mass:");
-        Label radiusLabel = new Label("Radius:");
+        Label massLabel = new Label("Mass: (0<Mass<50)");
+        Label radiusLabel = new Label("Radius: (0<Radius<100)");
 
         // Create text fields for mass and radius
         TextField massTextField = new TextField();
@@ -259,7 +332,7 @@ public class SceneController implements Initializable {
                         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                         errorAlert.setTitle("Invalid Input");
                         errorAlert.setHeaderText(null);
-                        errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values.");
+                        errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values that lie in correct ranges.");
                         errorAlert.showAndWait();
                         cylinderInput();
                     }
@@ -274,7 +347,7 @@ public class SceneController implements Initializable {
                     Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                     errorAlert.setTitle("Invalid Input");
                     errorAlert.setHeaderText(null);
-                    errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values that lie in correct ranges.");
+                    errorAlert.setContentText("Invalid mass or radius input. Please enter numeric values.");
                     errorAlert.showAndWait();
                     cylinderInput();
                 }
@@ -283,6 +356,7 @@ public class SceneController implements Initializable {
         });
 
     }
+    // Helper method for handling user input when setting cube box properties
     void cubicBoxInput(){
         GridPane gridPane = new GridPane();
 
@@ -290,8 +364,8 @@ public class SceneController implements Initializable {
         gridPane.setVgap(10); // Set vertical gap between elements
 
         // Create labels for mass and radius
-        Label massLabel = new Label("Mass:");
-        Label radiusLabel = new Label("Side Length:");
+        Label massLabel = new Label("Mass: (0<Mass<50)");
+        Label radiusLabel = new Label("Side Length: (0<Length<100)");
 
         // Create text fields for mass and radius
         TextField massTextField = new TextField();
@@ -361,6 +435,7 @@ public class SceneController implements Initializable {
 
         });
     }
+    // Helper method for loading the road pane and its associated controller
     public void loadRoadPane(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("road.fxml"));
 
@@ -372,6 +447,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the vector pane and its associated controller
     public void loadVectorPane(){
         FXMLLoader loaderVector = new FXMLLoader(getClass().getResource("force.fxml"));
         forceController = new ForceController();
@@ -382,6 +458,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the checkbox pane and its associated controller
     public void loadCheckBoxPane(){
         FXMLLoader loaderCheckBox = new FXMLLoader(getClass().getResource("checkbox.fxml"));
         checkboxController = new CheckboxController();
@@ -392,6 +469,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the slider pane and its associated controller
     public void loadSliderPane(){
         FXMLLoader loaderSlider = new FXMLLoader(getClass().getResource("slider.fxml"));
 
@@ -405,6 +483,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the info pane and its associated controller
     public void loadInfoPane(){
         FXMLLoader loaderInfo = new FXMLLoader(getClass().getResource("info.fxml"));
 
@@ -418,6 +497,7 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    // Helper method for loading the background pane and its associated controller
     public void loadBackgroundPane(){
         FXMLLoader loaderBackground = new FXMLLoader(getClass().getResource("background.fxml"));
         backgroundController = new BackgroundController();
@@ -428,6 +508,4 @@ public class SceneController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-
 }

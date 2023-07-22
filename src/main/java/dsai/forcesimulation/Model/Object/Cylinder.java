@@ -1,7 +1,5 @@
 package dsai.forcesimulation.Model.Object;
 
-import dsai.forcesimulation.Model.Surface.Surface;
-
 public class Cylinder extends MainObject implements RotatingObject{
     private double gamma = 0;
     private double omega = 0;
